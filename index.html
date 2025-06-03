@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新华每日新闻 - 权威发布</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            background-color: #c00;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .date {
+            font-size: 16px;
+        }
+        
+        .nav {
+            background-color: #a00;
+            padding: 10px 20px;
+        }
+        
+        .nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav li {
+            margin-right: 25px;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .nav a:hover {
+            border-bottom: 2px solid white;
+        }
+        
+        .main-content {
+            padding: 20px;
+        }
+        
+        .headline {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #c00;
+            padding-bottom: 20px;
+        }
+        
+        .headline-img {
+            width: 60%;
+            margin-right: 20px;
+            position: relative;
+        }
+        
+        .headline-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .headline-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(192, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+        }
+        
+        .headline-title h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .headline-title a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .headline-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .headline-side {
+            width: 40%;
+        }
+        
+        .headline-side-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .headline-side-item:last-child {
+            border-bottom: none;
+        }
+        
+        .headline-side-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .headline-side-item a {
+            color: #c00;
+            text-decoration: none;
+        }
+        
+        .headline-side-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .headline-side-item p {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .news-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            color: #c00;
+            border-left: 5px solid #c00;
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .news-item {
+            background-color: #fff;
+            border: 1px solid #eee;
+            transition: all 0.3s;
+        }
+        
+        .news-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .news-img {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .news-item:hover .news-img img {
+            transform: scale(1.05);
+        }
+        
+        .news-content {
+            padding: 15px;
+        }
+        
+        .news-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .news-content a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .news-content a:hover {
+            color: #c00;
+        }
+        
+        .news-content p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .news-meta {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .news-list {
+            list-style: none;
+        }
+        
+        .news-list-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .news-list-item a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .news-list-item a:hover {
+            color: #c00;
+            text-decoration: underline;
+        }
+        
+        .news-list-item span {
+            float: right;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .hot-tags {
+            margin: 20px 0;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: #f0f0f0;
+            color: #c00;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .tag:hover {
+            background-color: #c00;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">新华每日新闻</div>
+            <div class="date">2023年11月15日 星期三</div>
+        </header>
+        
+        <nav class="nav">
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">国内</a></li>
+                <li><a href="#">国际</a></li>
+                <li><a href="#">财经</a></li>
+                <li><a href="#">科技</a></li>
+                <li><a href="#">军事</a></li>
+                <li><a href="#">体育</a></li>
+                <li><a href="#">娱乐</a></li>
+                <li><a href="#">生活</a></li>
+            </ul>
+        </nav>
+        
+        <div class="main-content">
+            <div class="headline">
+                <div class="headline-img">
+                    <img src=" https://ts1.tc.mm.bing.net/th/id/R-C.f0c32f1cd3dcb7033653c27a5abf407e?rik=VWidN6j1GCRWuQ&riu=http%3a%2f%2fpaper.people.com.cn%2frmrb%2fres%2f1%2f20151120%2f1447957066019_1.jpg&ehk=NHAX8nwLa%2bezkEDPuerNMjonzflDHjKncWZBy9peXs4%3d&risl=&pid=ImgRaw&r=0 " alt="习近平主席出席APEC会议">
+                    <div class="headline-title">
+                        <h2><a href="https://news.cctv.com/2023/11/15/ARTI123456789.shtml">习近平出席亚太经合组织第三十次领导人非正式会议并发表重要讲话</a></h2>
+                        <p>强调要坚持创新驱动、开放导向、绿色发展、普惠共享，推动亚太地区实现更大发展</p>
+                    </div>
+                </div>
+                <div class="headline-side">
+                    <div class="headline-side-item">
+                        <h3><a href="https://news.cctv.com/2023/11/15/ARTI987654321.shtml">中央金融工作会议在北京举行 习近平李强作重要讲话</a></h3>
+                        <p>会议总结了党的十八大以来的金融工作，分析了金融高质量发展面临的形势，部署了当前和今后一个时期的金融工作。</p>
+                    </div>
+                    <div class="headline-side-item">
+                        <h3><a href="https://news.cctv.com/2023/11/14/ARTI123123123.shtml">我国成功发射新一代海洋水色观测卫星</a></h3>
+                        <p>11月14日10时48分，我国在太原卫星发射中心使用长征二号丙运载火箭，成功将新一代海洋水色观测卫星发射升空。</p>
+                    </div>
+                    <div class="headline-side-item">
+                        <h3><a href="https://news.cctv.com/2023/11/14/ARTI456456456.shtml">前三季度我国新设外商投资企业同比增长32.4%</a></h3>
+                        <p>商务部14日公布数据显示，2023年1至9月，全国新设立外商投资企业37814家，同比增长32.4%。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hot-tags">
+                <a href="#" class="tag">#APEC会议</a>
+                <a href="#" class="tag">#中央金融工作会议</a>
+                <a href="#" class="tag">#海洋卫星</a>
+                <a href="#" class="tag">#外商投资</a>
+                <a href="#" class="tag">#中美关系</a>
+                <a href="#" class="tag">#双十一</a>
+                <a href="#" class="tag">#冬季呼吸道疾病</a>
+            </div>
+            
+            <div class="news-section">
+                <h2 class="section-title">要闻速递</h2>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-img">
+                            <a href="https://news.cctv.com/2023/11/15/ARTI111111111.shtml"><img src=" http://www.qstheory.cn/yaowen/2023-11/15/1129975762_17000246895111n.jpg "></a>
+                        </div>
+                        <div class="news-content">
+                            <h3><a href="https://news.cctv.com/2023/11/15/ARTI111111111.shtml">习近平主席同美国总统拜登举行中美元首会晤</a></h3>
+                            <p>两国元首就事关中美关系的战略性、全局性、方向性问题以及事关世界和平和发展的重大问题坦诚深入地交换了意见。</p>
+                            <div class="news-meta">2023-11-15 18:30</div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-img">
+                            <a href="https://news.cctv.com/2023/11/15/ARTI222222222.shtml"><img src=" https://tse2-mm.cn.bing.net/th/id/OIP-C.ClN9BNI3g3WM5IKvN4DqewHaDJ?rs=1&pid=ImgDetMain " alt="冬季呼吸道疾病"></a>
+                        </div>
+                        <div class="news-content">
+                            <h3><a href="https://news.cctv.com/2023/11/15/ARTI222222222.shtml">国家卫健委：近期我国急性呼吸道疾病持续上升</a></h3>
+                            <p>监测显示，近期我国急性呼吸道疾病持续上升，与多种呼吸道病原体叠加有关，各地要努力增开相关诊室和治疗区域。</p>
+                            <div class="news-meta">2023-11-15 16:45</div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-img">
+                            <a href="https://news.cctv.com/2023/11/15/ARTI333333333.shtml"><img src="http://image1.askci.com/images/2023/11/13/ed0d62a6-2b19-4124-bb70-cf851fde983b.png" alt="双十一"></a>
+                        </div>
+                        <div class="news-content">
+                            <h3><a href="https://news.cctv.com/2023/11/15/ARTI333333333.shtml">2023年"双十一"成绩单出炉：全网交易额达11386亿元</a></h3>
+                            <p>数据显示，2023年"双十一"期间(10月31日20:00至11月11日24:00)，全网交易总额达11386亿元，同比增长2.08%。</p>
+                            <div class="news-meta">2023-11-15 14:20</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="news-section">
+                <div style="display: flex; justify-content: space-between;">
+                    <h2 class="section-title">国内新闻</h2>
+                    <a href="#" style="color: #c00; text-decoration: none; font-size: 14px; align-self: flex-end;">更多 >></a>
+                </div>
+                <ul class="news-list">
+                    <li class="news-list-item"><a href="https://news.cctv.com/2023/11/15/ARTI444444444.shtml">国家统计局：10月份国民经济持续恢复向好</a><span>11-15 10:00</span></li>
+                    <li class="news-list-item"><a href="https://news.cctv.com/2023/11/15/ARTI555555555.shtml">我国首条直通中越边境的高铁开始全线运行试验</a><span>11-15 09:30</span></li>
+                    <li class="news-list-item"><a href="https://news.cctv.com/2023/11/14/ARTI666666666.shtml">我国科学家在量子计算领域取得重大突破</a><span>11-14 20:15</span></li>
+                    <li class="news-list-item"><a href="https://news.cctv.com/2023/11/14/ARTI777777777.shtml">教育部等四部门：进一步提高国家助学贷款额度</a><span>11-14 18:40</span></li>
+                    <li class="news-list-item"><a href="https://news.cctv.com/2023/11/14/ARTI888888888.shtml">全国秋粮收获已过九成半 全年粮食产量有望再创新高</a><span>11-14 16:20</span></li>
+                </ul>
+            </div>
+            
+            <div class="news-section">
+                <div style="display: flex; justify-content: space-between;">
+                    <h2 class="section-title">国际新闻</h2>
+                    <a href="#" style="color: #c00; text-decoration: none; font-size: 14px; align-self: flex-end;">更多 >></a>
+                </div>
+                <div class="news-grid">
+                    <div class="news-item">
+                        <div class="news-img">
+                            <a href="https://news.cctv.com/2023/11/15/ARTI999999999.shtml"><img src=" https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Libraries/Production%20Library/15-11-2023_SC_Vote_ME_2.jpg/image1170x530cropped.jpg " alt="巴以冲突"></a>
+                        </div>
+                        <div class="news-content">
+                            <h3><a href="https://news.cctv.com/2023/11/15/ARTI999999999.shtml">联合国安理会通过决议呼吁巴以冲突人道主义暂停</a></h3>
+                            <p>联合国安理会15日通过决议，呼吁在加沙地带实施"人道主义暂停"，以便援助物资能够进入该地区。</p>
+                            <div class="news-meta">2023-11-15 22:10</div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-img">
+                            <a href="https://news.cctv.com/2023/11/15/ARTI101010101.shtml"><img src=" https://www.news.cn/milpro/20241128/a4c11400e26c4042b25e9fefcf71c98d/20241128a4c11400e26c4042b25e9fefcf71c98d_20241128515bf257f9d3424ba6ed8d5f6f6a82eb.jpeg " alt="俄乌冲突"></a>
+                        </div>
+                        <div class="news-content">
+                            <h3><a href="https://news.cctv.com/2023/11/15/ARTI101010101.shtml">俄乌冲突持续：双方在东部战线展开激烈争夺</a></h3>
+                            <p>俄罗斯和乌克兰军队近日在东部战线多个地区展开激烈争夺，双方均报告给对方造成重大损失。</p>
+                            <div class="news-meta">2023-11-15 21:05</div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-img">
+                            <a href="https://news.cctv.com/2023/11/15/ARTI121212121.shtml"><img src=" https://tse2-mm.cn.bing.net/th/id/OIP-C.oWTGdNjHLgnMnteOkvc1jAHaFH?rs=1&pid=ImgDetMain " alt="COP28"></a>
+                        </div>
+                        <div class="news-content">
+                            <h3><a href="https://news.cctv.com/2023/11/15/ARTI121212121.shtml">COP28气候大会筹备进入最后阶段 各方期待突破性进展</a></h3>
+                            <p>距离第28届联合国气候变化大会(COP28)开幕还有两周时间，国际社会期待此次大会能在应对气候变化方面取得突破性进展。</p>
+                            <div class="news-meta">2023-11-15 19:30</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>新华每日新闻 版权所有 © 2023 京ICP备12345678号-1</p>
+            <p>互联网新闻信息服务许可证：10120170001</p>
+            <p>违法和不良信息举报电话：12377 举报邮箱：jubao@12377.cn</p>
+        </footer>
+    </div>
+</body>
+</html>
